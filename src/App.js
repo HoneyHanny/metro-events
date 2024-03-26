@@ -1,9 +1,16 @@
+import { Switch, Router } from 'react-router-dom'
 import logo from './logo.svg'
-// import './App.css'
 import Login from './Pages/Login'
 
 function App() {
-    return <div className='App'>App component</div>
+    return (
+        <Router>
+            <Switch>
+                <Route exact path='login' component={<Login />} />
+                <Redirect from='/' to='login' />
+            </Switch>
+        </Router>
+    )
 }
 
 export default App

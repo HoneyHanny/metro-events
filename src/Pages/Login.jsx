@@ -11,6 +11,7 @@ const Login = () => {
         event.preventDefault()
         const data = new FormData(event.currentTarget)
         console.log({
+            // TODO(hans): Finish impl with backend
             email: data.get('email'),
             password: data.get('password'),
         })
@@ -114,80 +115,33 @@ const Login = () => {
                     </filter>
                 </defs>
             </svg>
-            {/* <svg
+            <div
                 width='597'
                 height='359'
                 viewBox='0 0 597 359'
-                fill='none'
-                xmlns='http://www.w3.org/2000/svg'
+                // fill='none'
                 className='container'
             >
-                <g filter='url(#filter0_bd_19_186)'>
-                    <rect x='4' width='589' height='351' rx='49' fill='white' />
-                </g>
-                <defs>
-                    <filter
-                        id='filter0_bd_19_186'
-                        x='-46'
-                        y='-50'
-                        width='689'
-                        height='451'
-                        filterUnits='userSpaceOnUse'
-                        color-interpolation-filters='sRGB'
-                    >
-                        <feFlood
-                            flood-opacity='0'
-                            result='BackgroundImageFix'
-                        />
-                        <feGaussianBlur
-                            in='BackgroundImageFix'
-                            stdDeviation='25'
-                        />
-                        <feComposite
-                            in2='SourceAlpha'
-                            operator='in'
-                            result='effect1_backgroundBlur_19_186'
-                        />
-                        <feColorMatrix
-                            in='SourceAlpha'
-                            type='matrix'
-                            values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0'
-                            result='hardAlpha'
-                        />
-                        <feOffset dy='4' />
-                        <feGaussianBlur stdDeviation='2' />
-                        <feComposite in2='hardAlpha' operator='out' />
-                        <feColorMatrix
-                            type='matrix'
-                            values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0'
-                        />
-                        <feBlend
-                            mode='normal'
-                            in2='effect1_backgroundBlur_19_186'
-                            result='effect2_dropShadow_19_186'
-                        />
-                        <feBlend
-                            mode='normal'
-                            in='SourceGraphic'
-                            in2='effect2_dropShadow_19_186'
-                            result='shape'
-                        />
-                    </filter>
-                </defs>
-            </svg> */}
-
-            {/* <div>
-                <div className='input-fields'>
-                    <h2>Log In</h2>
+                <div className='left'>
+                    <h1>Log In</h1>
+                    {/* username */}
                     Username
-                    <input></input>
+                    <input name='username' label='Username' autoFocus />
                     Password
-                    <input></input>
-                    <button></button>
-                    Don't have an account yet? <link>Sign up</link>
+                    <input name='password' label='Password' type='password' />
+                    <button>Log in</button>
+                    <h5>
+                        Don’t have an Account yet?
+                        <span style={{ color: '#596EC6' }}>Sign up</span>
+                    </h5>
                 </div>
-                <div className='app-name'>MetroEvent</div>
-            </div> */}
+                <hr />
+                <div className='right'>
+                    <h1>
+                        Metro<span style={{ color: '#596EC6' }}>Event</span>
+                    </h1>
+                </div>
+            </div>
         </>
     )
 }
