@@ -1,14 +1,9 @@
 import logo from './logo.svg'
-import './App.css'
+// import './App.css'
+import Login from './Pages/Login'
 
 function App() {
-  return (
-    <div className='App'>
-      {/* 
-        Login page or signup or menu or dashboard menu
-       */}
-    </div>
-  )
+    return <div className='App'>App component</div>
 }
 
 export default App
