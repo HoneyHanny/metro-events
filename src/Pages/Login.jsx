@@ -1,4 +1,4 @@
-import { ThemeProvider } from '@emotion/react'
+import { Link } from 'react-router-dom'
 import React from 'react'
 import '../css/login.css'
 
@@ -14,6 +14,7 @@ const Login = () => {
             // TODO(hans): Finish impl with backend
             email: data.get('email'),
             password: data.get('password'),
+            // TODO(hans): Check if confirm password is the same
         })
     }
 
@@ -124,7 +125,6 @@ const Login = () => {
             >
                 <div className='left'>
                     <h1>Log In</h1>
-                    {/* username */}
                     Username
                     <input name='username' label='Username' autoFocus />
                     Password
@@ -132,7 +132,9 @@ const Login = () => {
                     <button>Log in</button>
                     <h5>
                         Don’t have an Account yet?
-                        <span style={{ color: '#596EC6' }}>Sign up</span>
+                        <Link style={{ color: '#596EC6' }} to='/signup'>
+                            Sign up
+                        </Link>
                     </h5>
                 </div>
                 <hr />

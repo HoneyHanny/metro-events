@@ -4,21 +4,6 @@ import './index.css'
 import reportWebVitals from './reportWebVitals'
 import App from './App'
 
-// const router = createBrowserRouter([
-//     {
-//         path: '/',
-//         element: <div>Hello World</div>,
-//     },
-//     {
-//         path: 'login',
-//         element: <Login />,
-//     },
-//     {
-//         path: 'register',
-//         element: <div>register test</div>,
-//     },
-// ])
-
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
     <React.StrictMode>

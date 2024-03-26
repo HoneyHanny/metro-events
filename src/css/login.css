@@ -24,7 +24,6 @@
     /* Note: backdrop-filter has minimal browser support */
 }
 
-/* Rectangle 54 */
 .container {
     font-family: Inter, Arial, sans-serif, Helvetica;
     user-select: none;
@@ -46,8 +45,8 @@
 
 .left {
     display: flex;
-    flex-direction: column;
     gap: 20px;
+    flex-direction: column;
     justify-content: center;
     color: #6a6a6a;
     font-weight: bold;
@@ -60,6 +59,11 @@
     color: #6a6a6a;
     flex-grow: 1;
     padding: 10px;
+}
+
+.left > h5 {
+    margin-left: auto;
+    margin-right: auto;
 }
 
 input {

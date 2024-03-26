@@ -1,5 +1,6 @@
 import React from 'react'
 import '../css/signup.css'
+import { Link } from 'react-router-dom'
 
 const SignUp = () => {
     const handleSubmit = (event) => {
@@ -118,16 +119,19 @@ const SignUp = () => {
                 className='container'
             >
                 <div className='left'>
-                    <h1>Log In</h1>
-                    {/* username */}
+                    <h1>Sign Up</h1>
                     Username
                     <input name='username' label='Username' autoFocus />
                     Password
                     <input name='password' label='Password' type='password' />
-                    <button>Log in</button>
+                    Confirm password
+                    <input name='password' label='Password' type='password' />
+                    <button>Sign up</button>
                     <h5>
-                        Don’t have an Account yet?
-                        <span style={{ color: '#596EC6' }}>Sign up</span>
+                        Already have an Account
+                        <Link style={{ color: '#596EC6' }} to='/login'>
+                            Log in
+                        </Link>
                     </h5>
                 </div>
                 <hr />
