@@ -1,14 +1,20 @@
-import { Switch, Router } from 'react-router-dom'
-import logo from './logo.svg'
+import {
+    BrowserRouter as Router,
+    Navigate,
+    Route,
+    Routes,
+} from 'react-router-dom'
 import Login from './Pages/Login'
+import SignUp from './Pages/SignUp'
 
 function App() {
     return (
         <Router>
-            <Switch>
-                <Route exact path='login' component={<Login />} />
-                <Redirect from='/' to='login' />
-            </Switch>
+            <Routes>
+                <Route exact path='login' element={<Login />} />
+                <Route exact path='signup' element={<SignUp />} />
+                <Route path='/' element={<Navigate to='login' />} />
+            </Routes>
         </Router>
     )
 }
