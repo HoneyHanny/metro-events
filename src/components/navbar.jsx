@@ -37,7 +37,7 @@ function ResponsiveAppBar() {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <img
-            src="/static/media/logo2.aeba76e33957fb0f1063.png"
+            src="../assets"
             alt="Logo"
             style={{ maxWidth: "150px", height: "auto" }}
           />

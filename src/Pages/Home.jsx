@@ -3,6 +3,7 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Navbar from '../components/navbar';
 import '../css/home.css';
+import EventsCard from '../components/eventscard'
 
 const Home = () => {
   return (
@@ -27,7 +28,9 @@ const Home = () => {
             <h3>Events Feed</h3>
             <Paper elevation={3} sx={{ borderRadius: '12px', padding: '20px',  height: '100vh' }}>
               {/* Content for middle column */}
-              Middle Column
+         
+              <EventsCard/>
+            
             </Paper>
           </Grid>
 
