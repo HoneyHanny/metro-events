@@ -8,6 +8,8 @@ Metro Events is an application designed to help everyone organize and join event
 - organizer
 - admin
 
+**Features**
+
 - Users can receive notifs of upcoming events.
 - Organizers are registered as regular users first.
 - Request to admin to be an organizer.
