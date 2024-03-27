@@ -20,6 +20,7 @@ function ResponsiveAppBar() {
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
+
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -33,20 +34,22 @@ function ResponsiveAppBar() {
   };
 
   return (
-    <AppBar position="static"  elevation={0} sx={{ backgroundColor: '#FFFFFF' }}> {/* Change background color here */}
-      <Container maxWidth="xl">
+    <AppBar position='static' elevation={0} sx={{ backgroundColor: '#FFFFFF' }}>
+      {' '}
+      {/* Change background color here */}
+      <Container maxWidth='xl'>
         <Toolbar disableGutters>
           <img
-            src="../assets"
-            alt="Logo"
-            style={{ maxWidth: "150px", height: "auto" }}
+            src='../assets'
+            alt='Logo'
+            style={{ maxWidth: '150px', height: 'auto' }}
           />
 
           <Typography
-            variant="h6"
+            variant='h6'
             noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
+            component='a'
+            href='#app-bar-with-responsive-menu'
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -56,23 +59,19 @@ function ResponsiveAppBar() {
               color: 'inherit',
               textDecoration: 'none',
             }}
-          >
-
-          </Typography>
+          ></Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
+              size='large'
+              aria-label='account of current user'
+              aria-controls='menu-appbar'
+              aria-haspopup='true'
               onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-
-            </IconButton>
+              color='inherit'
+            ></IconButton>
             <Menu
-              id="menu-appbar"
+              id='menu-appbar'
               anchorEl={anchorElNav}
               anchorOrigin={{
                 vertical: 'bottom',
@@ -88,17 +87,14 @@ function ResponsiveAppBar() {
               sx={{
                 display: { xs: 'block', md: 'none' },
               }}
-            >
-             
-            
-            </Menu>
+            ></Menu>
           </Box>
 
           <Typography
-            variant="h5"
+            variant='h5'
             noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
+            component='a'
+            href='#app-bar-with-responsive-menu'
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
@@ -112,19 +108,17 @@ function ResponsiveAppBar() {
           >
             LOGO
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-           
-          </Box>
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}></Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
+            <Tooltip title='Open settings'>
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt='Remy Sharp' src='/static/images/avatar/2.jpg' />
               </IconButton>
             </Tooltip>
             <Menu
               sx={{ mt: '45px' }}
-              id="menu-appbar"
+              id='menu-appbar'
               anchorEl={anchorElUser}
               anchorOrigin={{
                 vertical: 'top',
@@ -140,7 +134,7 @@ function ResponsiveAppBar() {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                  <Typography textAlign='center'>{setting}</Typography>
                 </MenuItem>
               ))}
             </Menu>
