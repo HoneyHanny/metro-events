@@ -35,11 +35,26 @@ const SignUp = () => {
 				password: credential.password,
 			});
 
-			// if (response.status === 201) {
-			// 	setSuccess(true);
-			// }
+			if (response.status === 201) {
+				alert("Created successfully.");
+				setSuccess(true);
+			}
 		} catch (err) {
 			console.error(err);
+			if (err.response.status === 400) {
+				alert("User already exists");
+				// * * IF THIS IS THE CASE, CLEAR ALL FIELDS
+				setCredentials({
+					...credential,
+					username: "",
+					password: "",
+					confirmPassword: "",
+				});
+			}
+			if (err.response.status === 405) {
+				alert("Failed to register");
+				return;
+			}
 		}
 	};
 
