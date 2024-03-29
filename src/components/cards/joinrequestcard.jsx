@@ -41,8 +41,8 @@ const joinrequestscard = ({ image, heading, subheading, description }) => {
                     <Avatar
                         sx={{
                             bgcolor: red[500],
-                            width: '80px',
-                            height: '80px',
+                            width: '50px',
+                            height: '50px',
                             borderRadius: '30px',
                         }}
                         aria-label='recipe'
@@ -96,8 +96,8 @@ const joinrequestscard = ({ image, heading, subheading, description }) => {
                     <Typography
                         variant='body2'
                         color='text.secondary'
-                        minWidth='170px'
-                        maxWidth='170px'
+                        minWidth='200px'
+                        maxWidth='200px'
                         maxHeight='40px'
                         overflow='hidden'
                         textOverflow='ellipsis'
