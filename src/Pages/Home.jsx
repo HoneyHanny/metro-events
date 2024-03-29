@@ -43,8 +43,13 @@ const Home = () => {
 							sx={{
 								borderRadius: "40px",
 								padding: "20px",
-								height: "100vh",
+								height: "103vh",
 								marginTop: "10px",
+								overflow: "auto", // Make the Paper scrollable
+								"&::-webkit-scrollbar": {
+									width: "0", // Hide the scrollbar on Webkit browsers (Chrome, Safari)
+								},
+								scrollbarWidth: "none", // Hide the scrollbar on Firefox
 							}}>
 							{/* Content for middle column */}
 							{/* Map the response */}
