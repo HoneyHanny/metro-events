@@ -35,9 +35,12 @@ const StyledCard = styled(Card)({
 // either `date` should be passed in a string or passed in as a `Date` then `toString()`
 export default function EventCard({
 	title,
+	venue,
 	date,
 	description,
 	numOfAttendees,
+	likes,
+	organizer,
 }) {
 	const [expanded, setExpanded] = React.useState(false);
 
