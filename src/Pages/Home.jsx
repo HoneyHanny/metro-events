@@ -7,13 +7,19 @@ import EventsCard from '../components/cards/eventscard';
 import Notifications from '../components/notifications';
 import NotificationCard from '../components/cards/notificationcard';
 import Acceptrequests from '../components/acceptrequests';
+import Joinrequests from '../components/joinrequests';
 const Home = () => {
   return (
     <>
       <Navbar />
       <div className='body'>
+       
+       
         <Grid container spacing={4}>
+          {/*left column */}
           <Notifications />
+
+
 
           {/* Middle column */}
           <Grid item xs={20} md={6}>
@@ -33,21 +39,14 @@ const Home = () => {
             </Paper>
           </Grid>
 
+
+
           {/* Right column */}
           <Grid item xs={16} md={3}>
-           {/* import the acceptrequest remain the grid for flex */}
+
                   <Acceptrequests/>
-            <Paper
-              elevation={4}
-              sx={{
-                borderRadius: '40px',
-                padding: '20px',
-                height: '50vh',
-                marginTop: '20px',
-              }}
-            >
-              <h3>Join Requests</h3>
-            </Paper>
+                  <Joinrequests/>
+           
           </Grid>
         </Grid>
       </div>
