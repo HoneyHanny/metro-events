@@ -16,7 +16,7 @@ const notifications = () => {
         }}
       >
         {/* <h3>Notifications</h3> */}
-        <h3>Upcoming Events </h3>
+        <h3>Notifications  </h3>
         <NotificationCard/>
       </Paper>
     </Grid>
