@@ -14,6 +14,7 @@ import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
 import Button from "@mui/material/Button";
 import ModeCommentOutlinedIcon from "@mui/icons-material/ModeCommentOutlined";
 import Basketball from "../../assets/images/basketball.jpg";
+import axios from "axios";
 
 const ExpandMore = styled((props) => {
 	const { expand, ...other } = props;
@@ -32,20 +33,26 @@ const StyledCard = styled(Card)({
 	marginBottom: 16,
 });
 
-// either `date` should be passed in a string or passed in as a `Date` then `toString()`
-export default function EventCard({
-	title,
-	venue,
-	date,
-	description,
-	numOfAttendees,
-	likes,
-	organizer,
-}) {
+export default function EventCard({ event }) {
 	const [expanded, setExpanded] = React.useState(false);
 
 	const handleExpandClick = () => {
 		setExpanded(!expanded);
+	};
+
+	const handleLikeClick = async (eventId) => {
+		try {
+			const updatedLikes = event.eventLikes + 1;
+			const response = await axios.put(
+				`http://localhost:8000/api/event/${eventId}/`,
+				{
+					eventLikes: updatedLikes,
+				}
+			);
+			console.log(response.data);
+		} catch (err) {
+			console.error(err);
+		}
 	};
 
 	return (
@@ -58,7 +65,9 @@ export default function EventCard({
 				}
 				action={
 					<div style={{ display: "flex", alignItems: "center" }}>
-						<span style={{ marginRight: "1px" }}>{numOfAttendees}</span>{" "}
+						<span style={{ marginRight: "1px" }}>
+							{event.eventNumberOfAttendees}
+						</span>{" "}
 						{/* Number outside the IconButton */}
 						<IconButton
 							sx={{
@@ -71,8 +80,8 @@ export default function EventCard({
 						</IconButton>
 					</div>
 				}
-				title={title}
-				subheader={date}
+				title={event.eventName}
+				subheader={event.eventDate}
 			/>
 			<CardMedia
 				component="img"
@@ -82,12 +91,13 @@ export default function EventCard({
 			/>
 			<CardContent>
 				<Typography variant="body2" color="text.secondary">
-					{description}
+					{event.eventDescription}
 				</Typography>
 			</CardContent>
 			<CardActions disableSpacing>
 				<IconButton sx={{ height: "40px", width: "40px" }}>
-					<FavoriteIcon />
+					<FavoriteIcon onClick={() => handleLikeClick(event.id)} />
+					{/* heart icon*/}
 				</IconButton>
 				<IconButton sx={{ height: "40px", width: "40px" }}>
 					<ModeCommentOutlinedIcon />

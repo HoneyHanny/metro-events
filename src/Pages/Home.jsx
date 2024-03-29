@@ -14,33 +14,30 @@ import AddIcon from '@mui/icons-material/Add';
 import Button from '@mui/material/Button';
 
 const Home = () => {
-  const [events, setEvents] = useState([]);
+    const [events, setEvents] = useState([]);
 
-  useEffect(() => {
-    const retrieve = async () => {
-      try {
-        let response = await axios.get(
-          'http://localhost:8000/api/event/'
-        );
-        setEvents(response.data);
-        console.log(response);
-      } catch (err) {
-        console.error(err);
-      }
-    };
+	useEffect(() => {
+		const retrieve = async () => {
+			try {
+				let response = await axios.get("http://localhost:8000/api/event/");
+				setEvents(response.data);
+			} catch (err) {
+				console.error(err);
+			}
+		};
 
-    retrieve();
-  }, []);
+		retrieve();
+	}, []);
 
-  return (
-    <>
-      <Navbar />
-      <div className='body' style={{ userSelect: 'none' }}>
-        <Grid container spacing={4}>
-          {/*left column */}
-          <Notifications />
+	return (
+		<>
+			<Navbar />
+			<div className="body" style={{ userSelect: "none" }}>
+				<Grid container spacing={4}>
+					{/*left column */}
+					<Notifications />
 
-          {/* Middle column */}
+					{/* Middle column */}
 
           <Grid item xs={20} md={6}>
           <div style={{ display: 'flex', alignItems: 'center', justifyConten: 'center' }}>
@@ -100,15 +97,15 @@ const Home = () => {
             </Paper>
           </Grid>
 
-          {/* Right column */}
-          <Grid item xs={16} md={3}>
-            <Acceptrequests />
-            <Joinrequests />
-          </Grid>
-        </Grid>
-      </div>
-    </>
-  );
+					{/* Right column */}
+					<Grid item xs={16} md={3}>
+						<Acceptrequests />
+						<Joinrequests />
+					</Grid>
+				</Grid>
+			</div>
+		</>
+	);
 };
 
 export default Home;
