@@ -13,6 +13,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
 import Button from '@mui/material/Button';
 import ModeCommentOutlinedIcon from '@mui/icons-material/ModeCommentOutlined';
+import Basketball from '../../assets/images/basketball.jpg'
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -40,7 +41,7 @@ export default function RecipeReviewCard() {
 
   return (
     <StyledCard
-      sx={{ maxWidth: 1000, elevation: 0 }}
+      sx={{ maxWidth: 2000, elevation: 0 }}
       style={{ boxShadow: 'none' }}
     >
       <CardHeader
@@ -69,7 +70,7 @@ export default function RecipeReviewCard() {
       <CardMedia
         component='img'
         height='194'
-        image='../src/assets/images/basketball.jpg'
+        image={Basketball}
         alt='Basketball Vent'
       />
       <CardContent>
@@ -92,10 +93,10 @@ export default function RecipeReviewCard() {
           color='primary'
           sx={{
             backgroundColor: '#596EC6',
-            borderRadius: '15px',
+            borderRadius: '35px',
             padding: '6px',
-            minWidth: '30px',
-            minHeight: '20px',
+            minWidth: '20px',
+            minHeight: '30px',
             marginRight: '5px',
             elevation: '0',
             marginLeft: 'auto', // This line pushes the button to the right

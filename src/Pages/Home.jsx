@@ -3,15 +3,16 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Navbar from '../components/navbar';
 import '../css/home.css';
-import EventsCard from '../components/eventscard';
+import EventsCard from '../components/cards/eventscard';
 import Notifications from '../components/notifications';
+import NotificationCard from '../components/cards/notificationcard';
 
 const Home = () => {
   return (
     <>
       <Navbar />
       <div className='body'>
-        <Grid container spacing={2}>
+        <Grid container spacing={4}>
           <Notifications />
 
           {/* Middle column */}
@@ -20,9 +21,10 @@ const Home = () => {
             <Paper
               elevation={3}
               sx={{
-                borderRadius: '12px',
+                borderRadius: '40px',
                 padding: '20px',
                 height: '100vh',
+                marginTop: '10px'
               }}
             >
               {/* Content for middle column */}
@@ -36,7 +38,7 @@ const Home = () => {
             <Paper
               elevation={4}
               sx={{
-                borderRadius: '12px',
+                borderRadius: '40px',
                 padding: '20px',
                 height: '50vh',
               }}
@@ -47,7 +49,7 @@ const Home = () => {
             <Paper
               elevation={4}
               sx={{
-                borderRadius: '12px',
+                borderRadius: '40px',
                 padding: '20px',
                 height: '50vh',
                 marginTop: '20px',

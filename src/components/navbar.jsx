@@ -37,12 +37,12 @@ function ResponsiveAppBar() {
     <AppBar position='static' elevation={0} sx={{ backgroundColor: '#FFFFFF' }}>
       {' '}
       {/* Change background color here */}
-      <Container maxWidth='xl'>
+      <Container maxWidth='2000'>
         <Toolbar disableGutters>
           <img
           src={LogoImage}
             alt='Logo'
-            style={{ maxWidth: '150px', height: 'auto' }}
+            style={{ maxWidth: '200px', height: 'auto' }}
           />
 
           <Typography
@@ -68,7 +68,7 @@ function ResponsiveAppBar() {
             }}
           >
             <IconButton
-              size='large'
+              size='extra-large'
               aria-label='account of current user'
               aria-controls='menu-appbar'
               aria-haspopup='true'
