@@ -13,7 +13,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
 import Button from '@mui/material/Button';
 import ModeCommentOutlinedIcon from '@mui/icons-material/ModeCommentOutlined';
-import Basketball from '../../assets/images/basketball.jpg'
+import Basketball from '../../assets/images/basketball.jpg';
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -32,7 +32,13 @@ const StyledCard = styled(Card)({
   marginBottom: 16,
 });
 
-export default function RecipeReviewCard() {
+// either `date` should be passed in a string or passed in as a `Date` then `toString()`
+export default function EventCard({
+  title,
+  date,
+  description,
+  numOfAttendees,
+}) {
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
@@ -50,7 +56,7 @@ export default function RecipeReviewCard() {
         }
         action={
           <div style={{ display: 'flex', alignItems: 'center' }}>
-            <span style={{ marginRight: '1px' }}>10</span>{' '}
+            <span style={{ marginRight: '1px' }}>{numOfAttendees}</span>{' '}
             {/* Number outside the IconButton */}
             <IconButton
               sx={{
@@ -64,8 +70,8 @@ export default function RecipeReviewCard() {
             </IconButton>
           </div>
         }
-        title='Shrimp and Chorizo Paella'
-        subheader='September 14, 2016'
+        title={title}
+        subheader={date}
       />
       <CardMedia
         component='img'
@@ -75,9 +81,7 @@ export default function RecipeReviewCard() {
       />
       <CardContent>
         <Typography variant='body2' color='text.secondary'>
-          This impressive paella is a perfect party dish and a fun meal to cook
-          together with your guests. Add 1 cup of frozen peas along with the
-          mussels, if you like.
+          {description}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>

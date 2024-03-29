@@ -1,8 +1,9 @@
 import { Link, Navigate } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../css/login.css";
 import Vectorbg from "../components/vectorbg";
-import axios from "axios";
+import axios, { AxiosHeaders } from "axios";
+import { WindowSharp } from "@mui/icons-material";
 
 // const defaultTheme = createTheme()
 
@@ -29,10 +30,22 @@ const Login = () => {
 		try {
 			event.preventDefault();
 
-			const response = await axios.post("http://localhost:8000/api/login/", {
-				username: user.username,
-				password: user.password,
-			});
+			const response = await axios.post(
+				"http://localhost:8000/api/token/",
+				{
+					username: user.username,
+					password: user.password,
+				},
+				{
+					headers: {
+						Authorization: "JWT " + localStorage.getItem("access_token"),
+					},
+				}
+			);
+
+			// * * Save the access_token and refresh_token in the localStorage for further authentication.
+			localStorage.setItem("access_token", response.data.access);
+			localStorage.setItem("refresh_token", response.data.refresh);
 
 			if (response.status === 200) {
 				alert("Login successful");
@@ -40,7 +53,6 @@ const Login = () => {
 			}
 			console.log(response);
 		} catch (err) {
-			console.error(err.response.data.error);
 			if (err.response.status === 400) {
 				alert(err.response.data.error);
 				setUser((prevState) => ({
@@ -51,6 +63,7 @@ const Login = () => {
 		}
 	};
 
+	// Trial code rani para indicator naka log in ang user.
 	if (success) return <Navigate to="/home/" />;
 
 	return (
