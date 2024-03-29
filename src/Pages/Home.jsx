@@ -6,7 +6,7 @@ import '../css/home.css';
 import EventsCard from '../components/cards/eventscard';
 import Notifications from '../components/notifications';
 import NotificationCard from '../components/cards/notificationcard';
-
+import Acceptrequests from '../components/acceptrequests';
 const Home = () => {
   return (
     <>
@@ -35,17 +35,8 @@ const Home = () => {
 
           {/* Right column */}
           <Grid item xs={16} md={3}>
-            <Paper
-              elevation={4}
-              sx={{
-                borderRadius: '40px',
-                padding: '20px',
-                height: '50vh',
-              }}
-            >
-              <h3>Event Requests</h3>
-            </Paper>
-
+           {/* import the acceptrequest remain the grid for flex */}
+                  <Acceptrequests/>
             <Paper
               elevation={4}
               sx={{
