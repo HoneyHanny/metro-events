@@ -25,7 +25,7 @@ const Home = () => {
 		};
 
 		retrieve();
-	});
+	},[]);
 
 	return (
 		<>
@@ -44,7 +44,7 @@ const Home = () => {
 							sx={{
 								borderRadius: "40px",
 								padding: "20px",
-								height: "100vh",
+								height: "auto",
 								marginTop: "10px",
 							}}>
 							{/* Content for middle column */}
