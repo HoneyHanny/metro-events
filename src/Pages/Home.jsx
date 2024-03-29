@@ -24,19 +24,26 @@ const Home = () => {
                 borderRadius: '40px',
                 padding: '20px',
                 height: '100vh',
-                marginTop: '10px'
+                marginTop: '10px',
               }}
             >
               {/* Content for middle column */}
 
-              <EventsCard />
+              <EventsCard
+                title={'Shrimp and Chorizo Paella'}
+                date={'September 14, 2016'}
+                description={
+                  'This impressive paella is a perfect party dish and a fun meal to cook together with your guests. Add 1 cup of frozen peas along with the mussels, if you like.'
+                }
+                numOfAttendees={10}
+              />
             </Paper>
           </Grid>
 
           {/* Right column */}
           <Grid item xs={16} md={3}>
-           {/* import the acceptrequest remain the grid for flex */}
-                  <Acceptrequests/>
+            {/* import the acceptrequest remain the grid for flex */}
+            <Acceptrequests />
             <Paper
               elevation={4}
               sx={{
