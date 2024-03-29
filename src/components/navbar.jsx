@@ -9,6 +9,7 @@ import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
+import LogoImage from '../assets/images/logo2.png'
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
@@ -39,7 +40,7 @@ function ResponsiveAppBar() {
       <Container maxWidth='xl'>
         <Toolbar disableGutters>
           <img
-            src='../assets'
+          src={LogoImage}
             alt='Logo'
             style={{ maxWidth: '150px', height: 'auto' }}
           />
@@ -121,7 +122,8 @@ function ResponsiveAppBar() {
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title='Open settings'>
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+              <IconButton onClick={handleOpenUserMenu} sx={{ height: '40px', width: '40px' , marginRight:'-6px', marginLeft:'auto'}} lg={{ height: '40px', width: '40px' , marginRight:'6px', marginLeft:'auto'}}>
+                
                 <Avatar alt='Remy Sharp' src='/static/images/avatar/2.jpg' />
               </IconButton>
             </Tooltip>
