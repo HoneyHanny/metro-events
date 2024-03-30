@@ -18,11 +18,25 @@ import Basketball from "../../assets/images/basketball.jpg";
 import axios from "axios";
 import CommentPopup from "../commentpopup";
 import Popover from "@mui/material/Popover";
+import TextField from "@mui/material/TextField";
+import InputAdornment from "@mui/material/InputAdornment";
+import Backdrop from "@mui/material/Backdrop";
 
 const CustomPopover = styled(Popover)(({ theme }) => ({
 	"& .MuiPopover-paper": {
-		backgroundColor: "transparent", // Remove background
-		// Add any other custom styles you need
+		backgroundColor: "none", // Ensure the popover is transparent
+		Height: "400px",
+		borderRadius: "30px", // Set maximum height
+		// overflow: 'auto', // Enable scrolling
+		"&::-webkit-scrollbar": {
+			display: "none", // Hide scrollbar for Webkit browsers
+		},
+		"&::-ms-scrollbar": {
+			display: "none", // Hide scrollbar for IE and Edge
+		},
+		"&::-webkit-scrollbar-thumb": {
+			background: "transparent", // Make scrollbar thumb transparent
+		},
 	},
 }));
 
@@ -36,12 +50,6 @@ const ExpandMore = styled((props) => {
 		duration: theme.transitions.duration.shortest,
 	}),
 }));
-
-const StyledCard = styled(Card)({
-	backgroundColor: "#F0F0F0",
-	borderRadius: 16,
-	marginBottom: 16,
-});
 
 export default function EventCard({ event }) {
 	const [expanded, setExpanded] = React.useState(false);
@@ -179,6 +187,35 @@ export default function EventCard({ event }) {
 						onClick={(e) => handleCommentClick(event.id, e.currentTarget)}
 					/>
 				</IconButton>
+				<TextField
+					variant="outlined"
+					placeholder="Add a comment"
+					sx={{
+						marginLeft: "10px", // Adjust the margin as needed
+						borderRadius: "19px", // Curve the border to match the background
+						backgroundColor: "#d9d9d9", // Set the background color
+						width: 350, // Set the width of the TextField
+						"& .MuiOutlinedInput-root": {
+							"& fieldset": {
+								borderRadius: "19px",
+								borderColor: "#d9d9d9", // Match the border color with the background color
+							},
+							"&:hover fieldset": {
+								borderColor: "#d9d9d9", // Ensure the border color remains consistent on hover
+							},
+							"&.Mui-focused fieldset": {
+								borderColor: "#d9d9d9", // Ensure the border color remains consistent when focused
+							},
+						},
+					}}
+					inputProps={{
+						style: {
+							height: 35, // Set the height of the input field
+							padding: "0 14px", // Adjust padding as needed
+							borderRadius: 15,
+						},
+					}}
+				/>
 
 				<Button
 					variant="contained"
@@ -203,17 +240,14 @@ export default function EventCard({ event }) {
 
 			<CustomPopover
 				open={open}
-				anchorEl={anchorEl}
-				onClose={handleCloseCommentPopup}
-				anchorOrigin={{
-					vertical: "bottom",
-					horizontal: "left",
+				anchorReference="none"
+				sx={{
+					display: "flex",
+					justifyContent: "center",
+					alignItems: "center",
 				}}
-				transformOrigin={{
-					vertical: "top",
-					horizontal: "left",
-				}}>
-				<CommentPopup comments={comments} />
+				onClose={handleCloseCommentPopup}>
+				<CommentPopup />
 			</CustomPopover>
 		</StyledCard>
 	);
