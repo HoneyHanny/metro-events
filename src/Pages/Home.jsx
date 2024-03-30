@@ -61,7 +61,7 @@ const Home = () => {
                                     padding: '6px',
                                     minWidth: '20px',
                                     minHeight: '30px',
-                                    elevation: '0',
+                                    elevation: '3',
                                     marginLeft: 'auto',
                                     marginRight: '10px',
                                     color: '#6A6A6A',
