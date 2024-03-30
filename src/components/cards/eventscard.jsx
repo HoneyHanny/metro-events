@@ -58,11 +58,19 @@ export default function EventCard({ event }) {
 	const handleJoinClick = async (eventId) => {
 		try {
 			const response = await axios.post(
-				`http://localhost:8000/api/event/join/${eventId}/`
+				`http://localhost:8000/api/event/join/${eventId}/`,
+				{},
+				{
+					headers: {
+						Authorization: "JWT " + localStorage.getItem("access_token"),
+					},
+				}
 			);
 			console.log(response.data);
 		} catch (err) {
-			console.error(err);
+			if (err.response.status === 400) {
+				alert("You have already joined this event");
+			}
 		}
 	};
 
