@@ -44,9 +44,12 @@ export default function EventCard({ event }) {
 		try {
 			const updatedLikes = event.eventLikes + 1;
 			const response = await axios.put(
-				`http://localhost:8000/api/event/${eventId}/`,
+				`http://localhost:8000/api/event/like/${eventId}/`,
+				{},
 				{
-					eventLikes: updatedLikes,
+					headers: {
+						Authorization: "JWT " + localStorage.getItem("access_token"),
+					},
 				}
 			);
 			console.log(response.data);
@@ -57,7 +60,7 @@ export default function EventCard({ event }) {
 
 	const handleJoinClick = async (eventId) => {
 		try {
-			const response = await axios.post(
+			const response = await axios.put(
 				`http://localhost:8000/api/event/join/${eventId}/`,
 				{},
 				{
@@ -67,6 +70,10 @@ export default function EventCard({ event }) {
 				}
 			);
 			console.log(response.data);
+			if (response.status === 200) {
+				alert("Join request was successfully sent.");
+				// TODO: Pwede ni ninyo i unclickable ang button. Kamo na bahala.
+			}
 		} catch (err) {
 			if (err.response.status === 400) {
 				alert("You have already joined this event");
@@ -84,9 +91,6 @@ export default function EventCard({ event }) {
 				}
 				action={
 					<div style={{ display: "flex", alignItems: "center" }}>
-						<span style={{ marginRight: "1px" }}>
-							{event.eventNumberOfAttendees}
-						</span>{" "}
 						{/* Number outside the IconButton */}
 						<IconButton
 							sx={{
@@ -115,6 +119,7 @@ export default function EventCard({ event }) {
 			</CardContent>
 			<CardActions disableSpacing>
 				<IconButton sx={{ height: "40px", width: "40px" }}>
+					<span style={{ marginRight: "1px" }}>{event.eventLikes}</span>{" "}
 					<FavoriteIcon onClick={() => handleLikeClick(event.id)} />
 					{/* heart icon*/}
 				</IconButton>
