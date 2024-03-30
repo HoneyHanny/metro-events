@@ -5,6 +5,8 @@ import Acceptrequestscard from "./cards/acceptrequestcard";
 
 // Left column
 const acceptrequests = ({ request }) => {
+	console.log(request);
+
 	return (
 		<Paper
 			elevation={4}

@@ -13,7 +13,6 @@ import ResponsiveAppBar from "./../components/navbar";
 import AddIcon from "@mui/icons-material/Add";
 import Button from "@mui/material/Button";
 
-
 const Home = () => {
 	const [events, setEvents] = useState([]);
 	const [request, setRequest] = useState([]);
@@ -32,17 +31,17 @@ const Home = () => {
 			try {
 				let response = await axios.get(
 					"http://localhost:8000/api/event/join/request/",
-					{},
 					{
 						headers: {
 							Authorization: "JWT " + localStorage.getItem("access_token"),
 						},
 					}
 				);
-				console.log(response.data);
+
+				console.log("REQUEST" + response);
 				setRequest(response.data);
 			} catch (err) {
-				console.log(err);
+				console.error(err);
 			}
 		};
 		getEvents();
