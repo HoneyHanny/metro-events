@@ -60,8 +60,8 @@ export default function EventCard({ event }) {
 
 	const handleJoinClick = async (eventId) => {
 		try {
-			const response = await axios.put(
-				`http://localhost:8000/api/event/join/${eventId}/`,
+			const response = await axios.post(
+				`http://localhost:8000/api/event/join/request/${eventId}/`,
 				{},
 				{
 					headers: {
@@ -75,6 +75,7 @@ export default function EventCard({ event }) {
 				// TODO: Pwede ni ninyo i unclickable ang button. Kamo na bahala.
 			}
 		} catch (err) {
+			console.log(err);
 			if (err.response.status === 400) {
 				alert("You have already joined this event");
 			}
