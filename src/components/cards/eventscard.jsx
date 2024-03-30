@@ -81,6 +81,25 @@ export default function EventCard({ event }) {
 		}
 	};
 
+	const handleCommentClick = async (eventId) => {
+		alert("Comment was clicked");
+		try {
+			const response = await axios.get(
+				`http://localhost:8000/api/event/comment/${eventId}/`
+			);
+			console.log(response);
+			if (response.status === 200) {
+				alert("Map the return response");
+				console.log(response.data);
+				// TODO: Map the response data
+			}
+		} catch (err) {
+			if (err.response.status === 400) {
+				alert("You have already joined this event");
+			}
+		}
+	};
+
 	return (
 		<StyledCard
 			sx={{ maxWidth: 2000, elevation: 0 }}
@@ -124,7 +143,9 @@ export default function EventCard({ event }) {
 					{/* heart icon*/}
 				</IconButton>
 				<IconButton sx={{ height: "40px", width: "40px" }}>
-					<ModeCommentOutlinedIcon />
+					<ModeCommentOutlinedIcon
+						onClick={() => handleCommentClick(event.id)}
+					/>
 				</IconButton>
 
 				<Button

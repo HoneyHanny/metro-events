@@ -19,11 +19,7 @@ const Home = () => {
 	useEffect(() => {
 		const retrieve = async () => {
 			try {
-				let response = await axios.get("http://localhost:8000/api/event/", {
-					headers: {
-						Authorization: "JWT " + localStorage.getItem("access_token"),
-					},
-				});
+				let response = await axios.get("http://localhost:8000/api/event/");
 				setEvents(response.data);
 			} catch (err) {
 				console.error(err);
