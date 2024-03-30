@@ -55,6 +55,17 @@ export default function EventCard({ event }) {
 		}
 	};
 
+	const handleJoinClick = async (eventId) => {
+		try {
+			const response = await axios.post(
+				`http://localhost:8000/api/event/join/${eventId}/`
+			);
+			console.log(response.data);
+		} catch (err) {
+			console.error(err);
+		}
+	};
+
 	return (
 		<StyledCard
 			sx={{ maxWidth: 2000, elevation: 0 }}
@@ -118,7 +129,8 @@ export default function EventCard({ event }) {
 						"&:hover": {
 							backgroundColor: "#455990", // Optional: Change hover color
 						},
-					}}>
+					}}
+					onClick={() => handleJoinClick(event.id)}>
 					Join
 				</Button>
 			</CardActions>
