@@ -51,6 +51,12 @@ const ExpandMore = styled((props) => {
 	}),
 }));
 
+const StyledCard = styled(Card)({
+	backgroundColor: "#F0F0F0",
+	borderRadius: 16,
+	marginBottom: 16,
+});
+
 export default function EventCard({ event }) {
 	const [expanded, setExpanded] = React.useState(false);
 	const [showCommentPopup, setShowCommentPopup] = useState(false);
@@ -247,7 +253,7 @@ export default function EventCard({ event }) {
 					alignItems: "center",
 				}}
 				onClose={handleCloseCommentPopup}>
-				<CommentPopup />
+				<CommentPopup comments={comments} />
 			</CustomPopover>
 		</StyledCard>
 	);
