@@ -28,7 +28,6 @@ const AcceptRequestsCard = ({ request }) => {
 			console.error(err);
 		}
 	};
-
 	return (
 		<Card
 			sx={{
