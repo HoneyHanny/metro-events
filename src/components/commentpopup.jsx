@@ -13,33 +13,59 @@ const CommentPopup = () => {
  ];
 
  return (
-    <Paper 
-      sx={{ 
-        borderRadius: '16px', 
-        padding: '20px', 
-        maxHeight: '300px',
-        marginBottom: '20px', 
-        overflow: 'auto', // Enable scrolling
-        '&::-webkit-scrollbar': {
-          display: 'none', // Hide scrollbar for Webkit browsers
-        },
-        '&::-ms-scrollbar': {
-          display: 'none', // Hide scrollbar for IE and Edge
-        },
-        '&::-webkit-scrollbar-thumb': {
-          background: 'transparent', // Make scrollbar thumb transparent
-        },
-      }}
-    >
-      {comments.map(comment => (
-        <CommentCard
-          key={comment.id}
-          avatarSrc={comment.avatarSrc}
-          name={comment.name}
-          comment={comment.comment}
-        />
-      ))}
-    </Paper>
+    <>
+
+  
+        
+      <Paper
+        sx={{
+          borderRadius: '16px',
+          padding: '20px',
+          maxHeight: '500px',
+          elevation: 'none',
+          boxShadow: 'none',
+          overflow: 'auto', // Enable scrolling
+          '&::-webkit-scrollbar': {
+            display: 'none', // Hide scrollbar for Webkit browsers
+          },
+          '&::-ms-scrollbar': {
+            display: 'none', // Hide scrollbar for IE and Edge
+          },
+          '&::-webkit-scrollbar-thumb': {
+            background: 'transparent', // Make scrollbar thumb transparent
+          },
+        }}
+      >
+        <h3> Comments</h3>
+        <Paper sx={{
+          borderRadius: '16px',
+          padding: '20px',
+          minHeight: '300px',
+          maxHeight: '400px',
+          elevation: 'none',
+          boxShadow: 'none',
+          overflow: 'auto', // Enable scrolling
+          '&::-webkit-scrollbar': {
+            display: 'none', // Hide scrollbar for Webkit browsers
+          },
+          '&::-ms-scrollbar': {
+            display: 'none', // Hide scrollbar for IE and Edge
+          },
+          '&::-webkit-scrollbar-thumb': {
+            background: 'transparent', // Make scrollbar thumb transparent
+          },
+        }}>
+          {comments.map(comment => (
+            <CommentCard
+              key={comment.id}
+              avatarSrc={comment.avatarSrc}
+              name={comment.name}
+              comment={comment.comment}
+            />
+          ))}
+        </Paper>
+      </Paper>
+    </>
  );
 };
 

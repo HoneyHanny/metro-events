@@ -24,14 +24,24 @@ import Backdrop from '@mui/material/Backdrop';
 
 
 const CustomPopover = styled(Popover)(({ theme }) => ({
+
   '& .MuiPopover-paper': {
-     backgroundColor: 'transparent', // Ensure the popover is transparent
-     maxHeight: '400px', // Set maximum height
-     overflow: 'auto', // Enable scrolling if content exceeds maxHeight
-   
+    backgroundColor: 'none', // Ensure the popover is transparent
+     Height: '400px',
+     borderRadius: '30px', // Set maximum height
+    // overflow: 'auto', // Enable scrolling
+    '&::-webkit-scrollbar': {
+      display: 'none', // Hide scrollbar for Webkit browsers
+    },
+    '&::-ms-scrollbar': {
+      display: 'none', // Hide scrollbar for IE and Edge
+    },
+    '&::-webkit-scrollbar-thumb': {
+      background: 'transparent', // Make scrollbar thumb transparent
+    },
   },
- }));
- 
+}));
+
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -79,29 +89,29 @@ export default function EventCard({ event }) {
     }
   };
 
-	const handleJoinClick = async (eventId) => {
-		try {
-			const response = await axios.post(
-				`http://localhost:8000/api/event/join/request/${eventId}/`,
-				{},
-				{
-					headers: {
-						Authorization: "JWT " + localStorage.getItem("access_token"),
-					},
-				}
-			);
-			console.log(response.data);
-			if (response.status === 200) {
-				alert("Join request was successfully sent.");
-				// TODO: Pwede ni ninyo i unclickable ang button. Kamo na bahala.
-			}
-		} catch (err) {
-			console.log(err);
-			if (err.response.status === 400) {
-				alert("You have already joined this event");
-			}
-		}
-	};
+  const handleJoinClick = async (eventId) => {
+    try {
+      const response = await axios.post(
+        `http://localhost:8000/api/event/join/request/${eventId}/`,
+        {},
+        {
+          headers: {
+            Authorization: "JWT " + localStorage.getItem("access_token"),
+          },
+        }
+      );
+      console.log(response.data);
+      if (response.status === 200) {
+        alert("Join request was successfully sent.");
+        // TODO: Pwede ni ninyo i unclickable ang button. Kamo na bahala.
+      }
+    } catch (err) {
+      console.log(err);
+      if (err.response.status === 400) {
+        alert("You have already joined this event");
+      }
+    }
+  };
 
   const handleCommentClick = async (eventId, event) => {
     alert("Comment was clicked");
@@ -211,20 +221,17 @@ export default function EventCard({ event }) {
 
 
       <CustomPopover
-        open={open}
-        anchorEl={anchorEl}
-        onClose={handleCloseCommentPopup}
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "left",
-        }}
-        transformOrigin={{
-          vertical: "top",
-          horizontal: "left",
-        }}
-      >
-        <CommentPopup />
-      </CustomPopover>
+ open={open}
+ anchorReference="none"
+ sx={{
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+ }}
+ onClose={handleCloseCommentPopup}
+>
+ <CommentPopup />
+</CustomPopover>
 
     </StyledCard>
   );
