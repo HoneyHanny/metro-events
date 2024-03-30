@@ -19,10 +19,13 @@ import axios from "axios";
 import CommentPopup from "../commentpopup";
 import Popover from "@mui/material/Popover";
 
+import Backdrop from "@mui/material/Backdrop";
+
 const CustomPopover = styled(Popover)(({ theme }) => ({
 	"& .MuiPopover-paper": {
-		backgroundColor: "transparent", // Remove background
-		// Add any other custom styles you need
+		backgroundColor: "transparent", // Ensure the popover is transparent
+		maxHeight: "400px", // Set maximum height
+		overflow: "auto", // Enable scrolling if content exceeds maxHeight
 	},
 }));
 
