@@ -13,6 +13,7 @@ import ResponsiveAppBar from "./../components/navbar";
 import AddIcon from "@mui/icons-material/Add";
 import Button from "@mui/material/Button";
 
+
 const Home = () => {
 	const [events, setEvents] = useState([]);
 

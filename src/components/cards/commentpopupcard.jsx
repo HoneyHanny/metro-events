@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 
 const CommentCard = ({ avatarSrc, name, comment }) => {
   return (
-    <Card sx={{ borderRadius: '16px', backgroundColor: '#F0F0F0', marginBottom: '16px' }}>
+    <Card sx={{ borderRadius: '16px', width:"350px", backgroundColor: '#F0F0F0', marginBottom: '16px' }}>
       <CardContent>
         <div style={{ display: 'flex', alignItems: 'center', marginBottom: '8px' }}>
           <Avatar src={avatarSrc} alt={name} />
