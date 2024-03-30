@@ -24,18 +24,18 @@ import Backdrop from "@mui/material/Backdrop";
 
 const CustomPopover = styled(Popover)(({ theme }) => ({
 	"& .MuiPopover-paper": {
-		backgroundColor: "none", // Ensure the popover is transparent
+		backgroundColor: "none",
 		Height: "400px",
-		borderRadius: "30px", // Set maximum height
-		// overflow: 'auto', // Enable scrolling
+		borderRadius: "30px",
+		// overflow: 'auto',
 		"&::-webkit-scrollbar": {
-			display: "none", // Hide scrollbar for Webkit browsers
+			display: "none",
 		},
 		"&::-ms-scrollbar": {
-			display: "none", // Hide scrollbar for IE and Edge
+			display: "none",
 		},
 		"&::-webkit-scrollbar-thumb": {
-			background: "transparent", // Make scrollbar thumb transparent
+			background: "transparent",
 		},
 	},
 }));
@@ -62,7 +62,8 @@ export default function EventCard({ event }) {
 	const [showCommentPopup, setShowCommentPopup] = useState(false);
 	const [anchorEl, setAnchorEl] = React.useState(null);
 	const [isLoadingComments, setIsLoadingComments] = useState(false); // Track loading state
-	const [comments, setComment] = useState([]);
+	const [comments, setComments] = useState([]);
+	const [comment, setComment] = useState("");
 
 	const handleExpandClick = () => {
 		setExpanded(!expanded);
@@ -82,6 +83,29 @@ export default function EventCard({ event }) {
 			);
 
 			console.log(response.data);
+		} catch (err) {
+			console.error(err);
+		}
+	};
+
+	const handleCommentSubmit = async (eventId) => {
+		event.preventDefault();
+
+		try {
+			const response = await axios.post(
+				`http://localhost:8000/api/event/comment/${eventId}/`,
+				{
+					comment: comment,
+				},
+				{
+					headers: {
+						Authorization: "JWT " + localStorage.getItem("access_token"),
+					},
+				}
+			);
+			console.log(response.data);
+			// Reset the comment field after submission
+			setComment("");
 		} catch (err) {
 			console.error(err);
 		}
@@ -111,6 +135,7 @@ export default function EventCard({ event }) {
 		}
 	};
 
+	// comment icon click
 	const handleCommentClick = async (eventId, currentTarget) => {
 		alert("Comment was clicked");
 		setIsLoadingComments(true); // Set loading state
@@ -194,35 +219,51 @@ export default function EventCard({ event }) {
 						onClick={(e) => handleCommentClick(event.id, e.currentTarget)}
 					/>
 				</IconButton>
-				<TextField
-					variant="outlined"
-					placeholder="Add a comment"
-					sx={{
-						marginLeft: "10px", // Adjust the margin as needed
-						borderRadius: "19px", // Curve the border to match the background
-						backgroundColor: "#d9d9d9", // Set the background color
-						width: 350, // Set the width of the TextField
-						"& .MuiOutlinedInput-root": {
-							"& fieldset": {
-								borderRadius: "19px",
-								borderColor: "#d9d9d9", // Match the border color with the background color
+
+				{/* TextField frmm */}
+				<form
+					onSubmit={(e) => {
+						e.preventDefault(); // Prevent the default form submission
+						handleCommentSubmit(event.id); // Call your submission function
+					}}>
+					<TextField
+						variant="outlined"
+						placeholder="Add a comment"
+						value={comment}
+						onChange={(e) => setComment(e.target.value)}
+						onKeyPress={(e) => {
+							if (e.key === "Enter") {
+								e.preventDefault();
+								handleCommentSubmit(event.id); // Submit the form
+							}
+						}}
+						sx={{
+							marginLeft: "10px",
+							borderRadius: "19px",
+							backgroundColor: "#d9d9d9",
+							width: 350,
+							"& .MuiOutlinedInput-root": {
+								"& fieldset": {
+									borderRadius: "19px",
+									borderColor: "#d9d9d9",
+								},
+								"&:hover fieldset": {
+									borderColor: "#d9d9d9",
+								},
+								"&.Mui-focused fieldset": {
+									borderColor: "#d9d9d9",
+								},
 							},
-							"&:hover fieldset": {
-								borderColor: "#d9d9d9", // Ensure the border color remains consistent on hover
+						}}
+						inputProps={{
+							style: {
+								height: 35,
+								padding: "0 14px",
+								borderRadius: 15,
 							},
-							"&.Mui-focused fieldset": {
-								borderColor: "#d9d9d9", // Ensure the border color remains consistent when focused
-							},
-						},
-					}}
-					inputProps={{
-						style: {
-							height: 35, // Set the height of the input field
-							padding: "0 14px", // Adjust padding as needed
-							borderRadius: 15,
-						},
-					}}
-				/>
+						}}
+					/>
+				</form>
 
 				<Button
 					variant="contained"
