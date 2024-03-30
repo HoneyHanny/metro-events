@@ -7,6 +7,8 @@ const CommentPopup = () => {
  const comments = [
     { id: 1, avatarSrc: '/avatar1.jpg', name: 'John Doe', comment: 'Great post!' },
     { id: 2, avatarSrc: '/avatar2.jpg', name: 'Jane Smith', comment: 'Nice article!' },
+    { id: 1, avatarSrc: '/avatar1.jpg', name: 'John Doe', comment: 'Great post!' },
+    { id: 2, avatarSrc: '/avatar2.jpg', name: 'Jane Smith', comment: 'Nice article!' },
     // Add more comments as needed
  ];
 
@@ -15,6 +17,7 @@ const CommentPopup = () => {
       sx={{ 
         borderRadius: '16px', 
         padding: '20px', 
+        maxHeight: '300px',
         marginBottom: '20px', 
         overflow: 'auto', // Enable scrolling
         '&::-webkit-scrollbar': {
