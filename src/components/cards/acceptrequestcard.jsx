@@ -5,8 +5,30 @@ import Typography from "@mui/material/Typography";
 import Avatar from "@mui/material/Avatar";
 import { red, blueGrey } from "@mui/material/colors";
 import Button from "@mui/material/Button";
+import axios from "axios";
 
-const AcceptRequestsCard = ({ image, heading, subheading, description }) => {
+const AcceptRequestsCard = ({ request }) => {
+	console.log(request);
+
+	const handleAcceptClick = async (id, value) => {
+		try {
+			let response = await axios.put(
+				`http://localhost:8000/api/event/join/request/response/${id}/`,
+				{
+					status: value === "Accept" ? true : false,
+				},
+				{
+					headers: {
+						Authorization: "JWT " + localStorage.getItem("access_token"),
+					},
+				}
+			);
+			console.log(response.status);
+		} catch (err) {
+			console.error(err);
+		}
+	};
+
 	return (
 		<Card
 			sx={{
@@ -74,7 +96,7 @@ const AcceptRequestsCard = ({ image, heading, subheading, description }) => {
 						maxHeight="40px"
 						overflow="hidden"
 						textOverflow="ellipsis">
-						{description}
+						{/* {description} */}
 						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non
 						risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing
 						nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas
@@ -100,7 +122,8 @@ const AcceptRequestsCard = ({ image, heading, subheading, description }) => {
 						color: "white",
 						// marginRight: '10px',
 						borderRadius: " 20px",
-					}}>
+					}}
+					onClick={() => handleAcceptClick(request.id, "Accept")}>
 					Accept
 				</Button>
 				<Button
@@ -109,7 +132,8 @@ const AcceptRequestsCard = ({ image, heading, subheading, description }) => {
 						backgroundColor: "#BEC6E7",
 						color: "white",
 						borderRadius: "20px",
-					}}>
+					}}
+					onClick={() => handleAcceptClick(request.id, "Decline")}>
 					Decline
 				</Button>
 			</div>
