@@ -80,6 +80,7 @@ export default function EventCard({ event }) {
 					},
 				}
 			);
+
 			console.log(response.data);
 		} catch (err) {
 			console.error(err);
