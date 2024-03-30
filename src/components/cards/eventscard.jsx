@@ -75,28 +75,29 @@ export default function EventCard({ event }) {
     }
   };
 
-  const handleJoinClick = async (eventId) => {
-    try {
-      const response = await axios.put(
-        `http://localhost:8000/api/event/join/${eventId}/`,
-        {},
-        {
-          headers: {
-            Authorization: "JWT " + localStorage.getItem("access_token"),
-          },
-        }
-      );
-      console.log(response.data);
-      if (response.status === 200) {
-        alert("Join request was successfully sent.");
-        // TODO: Pwede ni ninyo i unclickable ang button. Kamo na bahala.
-      }
-    } catch (err) {
-      if (err.response.status === 400) {
-        alert("You have already joined this event");
-      }
-    }
-  };
+	const handleJoinClick = async (eventId) => {
+		try {
+			const response = await axios.post(
+				`http://localhost:8000/api/event/join/request/${eventId}/`,
+				{},
+				{
+					headers: {
+						Authorization: "JWT " + localStorage.getItem("access_token"),
+					},
+				}
+			);
+			console.log(response.data);
+			if (response.status === 200) {
+				alert("Join request was successfully sent.");
+				// TODO: Pwede ni ninyo i unclickable ang button. Kamo na bahala.
+			}
+		} catch (err) {
+			console.log(err);
+			if (err.response.status === 400) {
+				alert("You have already joined this event");
+			}
+		}
+	};
 
   const handleCommentClick = async (eventId, event) => {
     alert("Comment was clicked");

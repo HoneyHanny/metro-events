@@ -16,9 +16,10 @@ import Button from "@mui/material/Button";
 
 const Home = () => {
 	const [events, setEvents] = useState([]);
+	const [request, setRequest] = useState([]);
 
 	useEffect(() => {
-		const retrieve = async () => {
+		const getEvents = async () => {
 			try {
 				let response = await axios.get("http://localhost:8000/api/event/");
 				setEvents(response.data);
@@ -27,7 +28,25 @@ const Home = () => {
 			}
 		};
 
-		retrieve();
+		const getJoinRequests = async () => {
+			try {
+				let response = await axios.get(
+					"http://localhost:8000/api/event/join/request/",
+					{},
+					{
+						headers: {
+							Authorization: "JWT " + localStorage.getItem("access_token"),
+						},
+					}
+				);
+				console.log(response.data);
+				setRequest(response.data);
+			} catch (err) {
+				console.log(err);
+			}
+		};
+		getEvents();
+		getJoinRequests();
 	}, []);
 
 	return (
@@ -94,7 +113,7 @@ const Home = () => {
 
 					{/* Right column */}
 					<Grid item xs={16} md={3}>
-						<Acceptrequests />
+						<Acceptrequests request={request} />;
 						<Joinrequests />
 					</Grid>
 				</Grid>
