@@ -19,13 +19,10 @@ import axios from "axios";
 import CommentPopup from "../commentpopup";
 import Popover from "@mui/material/Popover";
 
-import Backdrop from "@mui/material/Backdrop";
-
 const CustomPopover = styled(Popover)(({ theme }) => ({
 	"& .MuiPopover-paper": {
-		backgroundColor: "transparent", // Ensure the popover is transparent
-		maxHeight: "400px", // Set maximum height
-		overflow: "auto", // Enable scrolling if content exceeds maxHeight
+		backgroundColor: "transparent", // Remove background
+		// Add any other custom styles you need
 	},
 }));
 
@@ -51,6 +48,7 @@ export default function EventCard({ event }) {
 	const [showCommentPopup, setShowCommentPopup] = useState(false);
 	const [anchorEl, setAnchorEl] = React.useState(null);
 	const [isLoadingComments, setIsLoadingComments] = useState(false); // Track loading state
+	const [comments, setComment] = useState([]);
 
 	const handleExpandClick = () => {
 		setExpanded(!expanded);
@@ -98,12 +96,12 @@ export default function EventCard({ event }) {
 		}
 	};
 
-	const handleCommentClick = async (eventId, event) => {
+	const handleCommentClick = async (eventId, currentTarget) => {
 		alert("Comment was clicked");
 		setIsLoadingComments(true); // Set loading state
 
 		setShowCommentPopup(true);
-		setAnchorEl(event.currentTarget); // Use the event object passed to the function
+		setAnchorEl(currentTarget); // Use the event object passed to the function
 
 		try {
 			const response = await axios.get(
@@ -114,7 +112,8 @@ export default function EventCard({ event }) {
 				alert("Map the return response");
 				console.log(response.data);
 				setShowCommentPopup(true);
-				setAnchorEl(event.currentTarget);
+				setAnchorEl(currentTarget);
+				setComment(response.data);
 				// TODO: Map the response data
 			}
 		} catch (err) {
@@ -123,6 +122,7 @@ export default function EventCard({ event }) {
 			}
 		}
 	};
+
 	const handleCloseCommentPopup = () => {
 		// Close the popover when the user clicks outside of it
 		setAnchorEl(null);
@@ -176,7 +176,7 @@ export default function EventCard({ event }) {
 				{/* Comment icon, todo add a pop up-john */}
 				<IconButton sx={{ height: "40px", width: "40px" }}>
 					<ModeCommentOutlinedIcon
-						onClick={(event) => handleCommentClick(event.id, event)}
+						onClick={(e) => handleCommentClick(event.id, e.currentTarget)}
 					/>
 				</IconButton>
 
@@ -213,7 +213,7 @@ export default function EventCard({ event }) {
 					vertical: "top",
 					horizontal: "left",
 				}}>
-				<CommentPopup />
+				<CommentPopup comments={comments} />
 			</CustomPopover>
 		</StyledCard>
 	);
