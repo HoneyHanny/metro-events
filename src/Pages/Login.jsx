@@ -30,7 +30,7 @@ const Login = () => {
 		try {
 			event.preventDefault();
 
-			const response = await axios.post(
+			let response = await axios.post(
 				"http://localhost:8000/api/token/",
 				{
 					username: user.username,
@@ -51,7 +51,6 @@ const Login = () => {
 				alert("Login successful");
 				setSuccess(true);
 			}
-			console.log(response);
 		} catch (err) {
 			if (err.response.status === 400) {
 				alert(err.response.data.error);

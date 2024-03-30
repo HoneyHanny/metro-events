@@ -55,6 +55,25 @@ export default function EventCard({ event }) {
 		}
 	};
 
+	const handleJoinClick = async (eventId) => {
+		try {
+			const response = await axios.post(
+				`http://localhost:8000/api/event/join/${eventId}/`,
+				{},
+				{
+					headers: {
+						Authorization: "JWT " + localStorage.getItem("access_token"),
+					},
+				}
+			);
+			console.log(response.data);
+		} catch (err) {
+			if (err.response.status === 400) {
+				alert("You have already joined this event");
+			}
+		}
+	};
+
 	return (
 		<StyledCard
 			sx={{ maxWidth: 2000, elevation: 0 }}
@@ -118,7 +137,8 @@ export default function EventCard({ event }) {
 						"&:hover": {
 							backgroundColor: "#455990", // Optional: Change hover color
 						},
-					}}>
+					}}
+					onClick={() => handleJoinClick(event.id)}>
 					Join
 				</Button>
 			</CardActions>
