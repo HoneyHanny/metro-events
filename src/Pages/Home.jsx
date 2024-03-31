@@ -16,6 +16,7 @@ import Button from "@mui/material/Button";
 const Home = () => {
 	const [events, setEvents] = useState([]);
 	const [request, setRequest] = useState([]);
+	const [notifications, setNotifications] = useState([]);
 
 	useEffect(() => {
 		const getEvents = async () => {
@@ -38,14 +39,33 @@ const Home = () => {
 					}
 				);
 
-				console.log("REQUEST" + response);
 				setRequest(response.data);
 			} catch (err) {
 				console.error(err);
 			}
 		};
+
+		const getNotification = async () => {
+			try {
+				let response = await axios.get(
+					"http://localhost:8000/api/event/notification/",
+					{
+						headers: {
+							Authorization: "JWT " + localStorage.getItem("access_token"),
+						},
+					}
+				);
+				console.log("MAO NI ANG NOTIFC");
+				console.log(response.data);
+				setNotifications(response.data);
+			} catch (err) {
+				console.error(err);
+			}
+		};
+
 		getEvents();
 		getJoinRequests();
+		getNotification();
 	}, []);
 
 	return (
@@ -54,9 +74,7 @@ const Home = () => {
 			<div className="body" style={{ userSelect: "none" }}>
 				<Grid container spacing={4}>
 					{/*left column */}
-					<Notifications />
-
-					{/* Middle column */}
+					<Notifications notifications={notifications} />
 
 					<Grid item xs={20} md={6}>
 						<div
