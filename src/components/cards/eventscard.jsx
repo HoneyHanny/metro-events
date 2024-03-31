@@ -89,7 +89,7 @@ export default function EventCard({ event }) {
     };
 
     const handleCommentSubmit = async (eventId) => {
-        event.preventDefault();
+        // event.preventDefault();
 
         try {
             const response = await axios.post(
