@@ -53,7 +53,7 @@ const NotificationCard = ({ notifications }) => {
 							color="#596EC6"
 							fontWeight="bold">
 							{/* {heading} */}
-							{notifications.recipient.user}
+							{notifications.recipient.user.username}
 						</Typography>
 
 						<Typography
