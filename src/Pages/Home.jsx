@@ -40,6 +40,7 @@ const Home = () => {
     };
 
     // TODO: Get user id from url parameter
+    const [notifications, setNotifications] = useState([]);
 
     useEffect(() => {
         const getEvents = async () => {
@@ -65,14 +66,34 @@ const Home = () => {
                     }
                 );
 
-                console.log("REQUEST" + response);
                 setRequest(response.data);
             } catch (err) {
                 console.error(err);
             }
         };
+
+        const getNotification = async () => {
+            try {
+                let response = await axios.get(
+                    "http://localhost:8000/api/event/notification/",
+                    {
+                        headers: {
+                            Authorization:
+                                "JWT " + localStorage.getItem("access_token"),
+                        },
+                    }
+                );
+                console.log("MAO NI ANG NOTIFC");
+                console.log(response.data);
+                setNotifications(response.data);
+            } catch (err) {
+                console.error(err);
+            }
+        };
+
         getEvents();
         getJoinRequests();
+        getNotification();
     }, []);
 
     return (
@@ -81,9 +102,8 @@ const Home = () => {
             <div className="body" style={{ userSelect: "none" }}>
                 <Grid container spacing={4}>
                     {/*left column */}
-                    <Notifications />
+                    <Notifications notifications={notifications} />
 
-                    {/* Middle column */}
                     <Grid item xs={20} md={6}>
                         <div
                             style={{
@@ -95,7 +115,6 @@ const Home = () => {
                             <h3 style={{ marginRight: "10px" }}>Events Feed</h3>
                             {/* button create event, button with icon plus/ Adddd  */}
                             <Button
-                                onClick={handleCreateEvent}
                                 variant="contained"
                                 color="primary"
                                 startIcon={<AddIcon />}
