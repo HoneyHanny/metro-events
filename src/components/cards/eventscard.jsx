@@ -88,11 +88,18 @@ export default function EventCard({ event }) {
         }
     };
 
-    const handleCommentSubmit = async (eventId) => {
-        // event.preventDefault();
-
+    const handleCommentSubmit = async (e, eventId) => {
         try {
-            const response = await axios.post(
+            e.preventDefault();
+
+            // Check if the comment is empty
+            if (comment.trim() === "") {
+                alert("Bawal mo comment og wa kay i comment hehe!");
+                return; // Exit the function without further execution
+            }
+
+            alert(`You commented on ${event.eventName} event`);
+            const response = await axios.put(
                 `http://localhost:8000/api/event/comment/${eventId}/`,
                 {
                     comment: comment,
@@ -155,7 +162,7 @@ export default function EventCard({ event }) {
                 console.log(response.data);
                 setShowCommentPopup(true);
                 setAnchorEl(currentTarget);
-                setComment(response.data);
+                setComments(response.data);
                 // TODO: Map the response data
             }
         } catch (err) {
@@ -231,11 +238,9 @@ export default function EventCard({ event }) {
                     />
                 </IconButton>
 
-                {/* TextField frmm */}
                 <form
                     onSubmit={(e) => {
-                        e.preventDefault(); // Prevent the default form submission
-                        handleCommentSubmit(event.id); // Call your submission function
+                        handleCommentSubmit(e, event.id); // Call your submission function
                     }}
                 >
                     <TextField
@@ -243,12 +248,6 @@ export default function EventCard({ event }) {
                         placeholder="Add a comment"
                         value={comment}
                         onChange={(e) => setComment(e.target.value)}
-                        onKeyPress={(e) => {
-                            if (e.key === "Enter") {
-                                e.preventDefault();
-                                handleCommentSubmit(event.id); // Submit the form
-                            }
-                        }}
                         sx={{
                             marginLeft: "10px",
                             borderRadius: "19px",
