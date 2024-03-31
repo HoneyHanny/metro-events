@@ -5,19 +5,20 @@ import Joinrequestscard from "./cards/joinrequestcard";
 
 // Left column
 const joinrequests = () => {
-	return (
-		<Paper
-			elevation={4}
-			sx={{
-				borderRadius: "40px",
-				padding: "20px",
-				height: "50vh",
-				marginTop: "20px",
-			}}>
-			<h3>Accept Request </h3>
-			<Joinrequestscard />
-		</Paper>
-	);
+    return (
+        <Paper
+            elevation={4}
+            sx={{
+                borderRadius: "40px",
+                padding: "20px",
+                height: "50vh",
+                marginTop: "20px",
+            }}
+        >
+            <h3>Join Request </h3>
+            <Joinrequestscard />
+        </Paper>
+    );
 };
 
 export default joinrequests;
