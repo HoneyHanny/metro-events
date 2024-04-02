@@ -5,15 +5,12 @@ import Navbar from "../components/navbar";
 import "../css/home.css";
 import EventsCard from "../components/cards/eventscard";
 import Notifications from "../components/notifications";
-import NotificationCard from "../components/cards/notificationcard";
 import Acceptrequests from "../components/acceptrequests";
 import Joinrequests from "../components/joinrequests";
 import axios from "axios";
-import ResponsiveAppBar from "./../components/navbar";
 import AddIcon from "@mui/icons-material/Add";
 import Button from "@mui/material/Button";
 import CreateEventPopup from "../components/cards/createeventpopup";
-import { createEvent } from "@testing-library/react";
 import { ClickAwayListener } from "@mui/material";
 import { useParams } from "react-router-dom";
 
@@ -39,7 +36,6 @@ const Home = () => {
 		setAnchorCreateEvent(null);
 	};
 
-	// TODO: Get user id from url parameter
 	const [notifications, setNotifications] = useState([]);
 
 	useEffect(() => {

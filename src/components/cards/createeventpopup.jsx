@@ -3,20 +3,10 @@ import Popover from "@mui/material/Popover";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import {
-    ClickAwayListener,
-    Button,
-    TextField,
-    FormControl,
-    InputLabel,
-    Select,
-    MenuItem,
-    Checkbox,
-    FormControlLabel,
-} from "@mui/material";
+import { Button, TextField } from "@mui/material";
 import axios from "axios";
 
-const CreateEventPopup = ({ open, anchor, onClose, id }) => {
+const CreateEventPopup = ({ open, anchor, onClose, userId }) => {
     const [formData, setFormData] = useState({
         eventName: "",
         eventVenue: "",
@@ -41,10 +31,8 @@ const CreateEventPopup = ({ open, anchor, onClose, id }) => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        // TODO: submit form data using axios
         try {
-            console.log(parseInt(id));
-            console.log(formData.eventDate.toISOString().split("T")[0]);
+            console.log(parseInt(userId));
             let response = await axios.post(
                 "http://localhost:8000/api/event/create/",
                 {
@@ -52,8 +40,7 @@ const CreateEventPopup = ({ open, anchor, onClose, id }) => {
                     eventVenue: formData.eventVenue,
                     eventDate: formData.eventDate.toISOString().split("T")[0],
                     eventDescription: formData.eventDescription,
-                    eventOrganizer: parseInt(id),
-                    // eventOrganizer: // TODO: get current user id
+                    eventOrganizer: parseInt(userId),
                 },
                 {
                     headers: {
@@ -76,7 +63,6 @@ const CreateEventPopup = ({ open, anchor, onClose, id }) => {
             open={open}
             anchor={anchor}
             onClose={onClose}
-            // placement="bottom"
             anchorOrigin={{
                 vertical: "center",
                 horizontal: "center",

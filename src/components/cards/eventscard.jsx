@@ -129,9 +129,8 @@ export default function EventCard({ event }) {
 				}
 			);
 			console.log(response.data);
-			if (response.status === 200) {
+			if (response.status === 201) {
 				alert("Join request was successfully sent.");
-				// TODO: Pwede ni ninyo i unclickable ang button. Kamo na bahala.
 			}
 		} catch (err) {
 			console.log(err);
