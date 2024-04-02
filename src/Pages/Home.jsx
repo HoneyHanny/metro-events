@@ -36,8 +36,7 @@ const Home = () => {
 		setAnchorCreateEvent(null);
 	};
 
-    const [notifications, setNotifications] = useState([]);
-
+	const [notifications, setNotifications] = useState([]);
 
 	useEffect(() => {
 		const getEvents = async () => {
@@ -59,8 +58,26 @@ const Home = () => {
 						},
 					}
 				);
-
 				setRequest(response.data);
+			} catch (err) {
+				console.error(err);
+			}
+		};
+
+		const getApprovedOrganizers = async () => {
+			try {
+				let response = await axios.post(
+					"http://localhost:8000/api/event/organizer/",
+					{},
+					{
+						headers: {
+							Authorization: "JWT " + localStorage.getItem("access_token"),
+						},
+					}
+				);
+				setNotifications(response.data);
+				console.log("NOTIF");
+				console.log(response.data);
 			} catch (err) {
 				console.error(err);
 			}
@@ -84,6 +101,7 @@ const Home = () => {
 			}
 		};
 
+		getApprovedOrganizers();
 		getEvents();
 		getJoinRequests();
 		getNotification();
@@ -96,69 +114,66 @@ const Home = () => {
 				<Grid container spacing={4}>
 					{/*left column */}
 					<Notifications notifications={notifications} />
-                    <Grid item xs={20} md={6}>
-                        <div
-                            style={{
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                            }}
-                        >
-                            <h3 style={{ marginRight: "10px" }}>Events Feed</h3>
-                            {/* button create event, button with icon plus/ Adddd  */}
-                            <Button
-                                onClick={handleCreateEvent}
-                                variant="contained"
-                                color="primary"
-                                startIcon={<AddIcon />}
-                                sx={{
-                                    backgroundColor: "#FFFFFF",
-                                    borderRadius: "35px",
-                                    padding: "6px",
-                                    minWidth: "20px",
-                                    minHeight: "30px",
-                                    elevation: "0",
-                                    marginLeft: "auto",
-                                    marginRight: "10px",
-                                    color: "#6A6A6A",
+					<Grid item xs={20} md={6}>
+						<div
+							style={{
+								display: "flex",
+								alignItems: "center",
+								justifyContent: "center",
+							}}>
+							<h3 style={{ marginRight: "10px" }}>Events Feed</h3>
+							{/* button create event, button with icon plus/ Adddd  */}
+							<Button
+								onClick={handleCreateEvent}
+								variant="contained"
+								color="primary"
+								startIcon={<AddIcon />}
+								sx={{
+									backgroundColor: "#FFFFFF",
+									borderRadius: "35px",
+									padding: "6px",
+									minWidth: "20px",
+									minHeight: "30px",
+									elevation: "0",
+									marginLeft: "auto",
+									marginRight: "10px",
+									color: "#6A6A6A",
 
-                                    "&:hover": {
-                                        backgroundColor: "#BEC6E7", // Optional: Change hover color
-                                    },
-                                }}
-                            >
-                                event
-                            </Button>
-                            <ClickAwayListener>
-                                <CreateEventPopup
-                                    open={showCreateEventPopup}
-                                    anchor={anchorCreateEvent}
-                                    onClose={onCreateEventClose}
-                                    userId={id}
-                                />
-                            </ClickAwayListener>
-                        </div>
-                        <Paper
-                            elevation={3}
-                            sx={{
-                                borderRadius: "40px",
-                                padding: "20px",
-                                height: "103vh",
-                                marginTop: "10px",
-                                overflow: "auto", // Make the Paper scrollable
-                                "&::-webkit-scrollbar": {
-                                    width: "0", // Hide the scrollbar on Webkit browsers (Chrome, Safari)
-                                },
-                                scrollbarWidth: "none", // Hide the scrollbar on Firefox
-                            }}
-                        >
-                            {/* Content for middle column */}
-                            {/* Map the response */}
-                            {events.map((event) => {
-                                return <EventsCard event={event} />;
-                            })}
-                        </Paper>
-                    </Grid>
+									"&:hover": {
+										backgroundColor: "#BEC6E7", // Optional: Change hover color
+									},
+								}}>
+								event
+							</Button>
+							<ClickAwayListener>
+								<CreateEventPopup
+									open={showCreateEventPopup}
+									anchor={anchorCreateEvent}
+									onClose={onCreateEventClose}
+									userId={id}
+								/>
+							</ClickAwayListener>
+						</div>
+						<Paper
+							elevation={3}
+							sx={{
+								borderRadius: "40px",
+								padding: "20px",
+								height: "103vh",
+								marginTop: "10px",
+								overflow: "auto", // Make the Paper scrollable
+								"&::-webkit-scrollbar": {
+									width: "0", // Hide the scrollbar on Webkit browsers (Chrome, Safari)
+								},
+								scrollbarWidth: "none", // Hide the scrollbar on Firefox
+							}}>
+							{/* Content for middle column */}
+							{/* Map the response */}
+							{events.map((event) => {
+								return <EventsCard event={event} />;
+							})}
+						</Paper>
+					</Grid>
 
 					{/* Right column */}
 					<Grid item xs={16} md={3}>
