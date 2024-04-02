@@ -46,19 +46,12 @@ const Login = () => {
                 }
             );
 
-            // TODO: Also get the ID here
-            // Maybe make an endpoint that receives username and responds with the id
-
             // * * Save the access_token and refresh_token in the localStorage for further authentication.
             localStorage.setItem("access_token", response.data.access);
             localStorage.setItem("refresh_token", response.data.refresh);
 
             if (response.status === 200) {
-                // TODO: put id in the url
-                // in home use url id to create new event
-
                 try {
-                    // Unauthorized access
                     const response2 = await axios.get(
                         `http://localhost:8000/api/user/id/${user.username}`,
                         {
@@ -79,8 +72,6 @@ const Login = () => {
                 } catch (err) {
                     console.log(err);
                 }
-
-                // setId(response.data.access);
             }
         } catch (err) {
             console.log(err);
