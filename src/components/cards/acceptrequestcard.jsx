@@ -76,7 +76,7 @@ const AcceptRequestsCard = ({ request }) => {
 						component="div"
 						color="#596EC6"
 						fontWeight="bold">
-						JOHN CADUNGOG
+						{request.attendee.user.username}
 					</Typography>
 
 					<Typography

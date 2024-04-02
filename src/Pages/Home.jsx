@@ -15,91 +15,87 @@ import { ClickAwayListener } from "@mui/material";
 import { useParams } from "react-router-dom";
 
 const Home = () => {
-    let { id } = useParams();
-    const [events, setEvents] = useState([]);
-    const [request, setRequest] = useState([]);
-    const [showCreateEventPopup, setShowCreateEventPopup] = useState(false);
-    const [anchorCreateEvent, setAnchorCreateEvent] = useState(null);
+	let { id } = useParams();
+	const [events, setEvents] = useState([]);
+	const [request, setRequest] = useState([]);
+	const [showCreateEventPopup, setShowCreateEventPopup] = useState(false);
+	const [anchorCreateEvent, setAnchorCreateEvent] = useState(null);
 
-    const handleCreateEvent = (event) => {
-        setShowCreateEventPopup(true);
-        setAnchorCreateEvent(event.currentTarget);
-    };
+	const handleCreateEvent = (event) => {
+		setShowCreateEventPopup(true);
+		setAnchorCreateEvent(event.currentTarget);
+	};
 
-    const handleClickAway = (event) => {
-        setShowCreateEventPopup(false);
-        setAnchorCreateEvent(null);
-    };
+	const handleClickAway = (event) => {
+		setShowCreateEventPopup(false);
+		setAnchorCreateEvent(null);
+	};
 
-    const onCreateEventClose = (event) => {
-        setShowCreateEventPopup(false);
-        setAnchorCreateEvent(null);
-    };
+	const onCreateEventClose = (event) => {
+		setShowCreateEventPopup(false);
+		setAnchorCreateEvent(null);
+	};
 
     const [notifications, setNotifications] = useState([]);
 
-    useEffect(() => {
-        const getEvents = async () => {
-            try {
-                let response = await axios.get(
-                    "http://localhost:8000/api/event/"
-                );
-                setEvents(response.data);
-            } catch (err) {
-                console.error(err);
-            }
-        };
 
-        const getJoinRequests = async () => {
-            try {
-                let response = await axios.get(
-                    "http://localhost:8000/api/event/join/request/",
-                    {
-                        headers: {
-                            Authorization:
-                                "JWT " + localStorage.getItem("access_token"),
-                        },
-                    }
-                );
+	useEffect(() => {
+		const getEvents = async () => {
+			try {
+				let response = await axios.get("http://localhost:8000/api/event/");
+				setEvents(response.data);
+			} catch (err) {
+				console.error(err);
+			}
+		};
 
-                setRequest(response.data);
-            } catch (err) {
-                console.error(err);
-            }
-        };
+		const getJoinRequests = async () => {
+			try {
+				let response = await axios.get(
+					"http://localhost:8000/api/event/join/request/",
+					{
+						headers: {
+							Authorization: "JWT " + localStorage.getItem("access_token"),
+						},
+					}
+				);
 
-        const getNotification = async () => {
-            try {
-                let response = await axios.get(
-                    "http://localhost:8000/api/event/notification/",
-                    {
-                        headers: {
-                            Authorization:
-                                "JWT " + localStorage.getItem("access_token"),
-                        },
-                    }
-                );
-                console.log("MAO NI ANG NOTIFC");
-                console.log(response.data);
-                setNotifications(response.data);
-            } catch (err) {
-                console.error(err);
-            }
-        };
+				setRequest(response.data);
+			} catch (err) {
+				console.error(err);
+			}
+		};
 
-        getEvents();
-        getJoinRequests();
-        getNotification();
-    }, []);
+		const getNotification = async () => {
+			try {
+				let response = await axios.get(
+					"http://localhost:8000/api/event/notification/",
+					{
+						headers: {
+							Authorization: "JWT " + localStorage.getItem("access_token"),
+						},
+					}
+				);
+				setNotifications(response.data);
+				console.log("NOTIF");
+				console.log(response.data);
+			} catch (err) {
+				console.error(err);
+			}
+		};
 
-    return (
-        <>
-            <Navbar />
-            <div className="body" style={{ userSelect: "none" }}>
-                <Grid container spacing={4}>
-                    {/*left column */}
-                    <Notifications notifications={notifications} />
+		getEvents();
+		getJoinRequests();
+		getNotification();
+	}, []);
 
+	return (
+		<>
+			<Navbar />
+			<div className="body" style={{ userSelect: "none" }}>
+				<Grid container spacing={4}>
+					{/*left column */}
+					<Notifications notifications={notifications} />
                     <Grid item xs={20} md={6}>
                         <div
                             style={{
@@ -164,15 +160,15 @@ const Home = () => {
                         </Paper>
                     </Grid>
 
-                    {/* Right column */}
-                    <Grid item xs={16} md={3}>
-                        <Acceptrequests request={request} />;
-                        <Joinrequests />
-                    </Grid>
-                </Grid>
-            </div>
-        </>
-    );
+					{/* Right column */}
+					<Grid item xs={16} md={3}>
+						<Acceptrequests request={request} />;
+						<Joinrequests />
+					</Grid>
+				</Grid>
+			</div>
+		</>
+	);
 };
 
 export default Home;
