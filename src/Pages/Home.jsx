@@ -58,8 +58,26 @@ const Home = () => {
 						},
 					}
 				);
-
 				setRequest(response.data);
+			} catch (err) {
+				console.error(err);
+			}
+		};
+
+		const getApprovedOrganizers = async () => {
+			try {
+				let response = await axios.post(
+					"http://localhost:8000/api/event/organizer/",
+					{},
+					{
+						headers: {
+							Authorization: "JWT " + localStorage.getItem("access_token"),
+						},
+					}
+				);
+				setNotifications(response.data);
+				console.log("NOTIF");
+				console.log(response.data);
 			} catch (err) {
 				console.error(err);
 			}
@@ -83,6 +101,7 @@ const Home = () => {
 			}
 		};
 
+		getApprovedOrganizers();
 		getEvents();
 		getJoinRequests();
 		getNotification();
@@ -95,17 +114,17 @@ const Home = () => {
 				<Grid container spacing={4}>
 					{/*left column */}
 					<Notifications notifications={notifications} />
-
 					<Grid item xs={20} md={6}>
 						<div
 							style={{
 								display: "flex",
 								alignItems: "center",
-								justifyConten: "center",
+								justifyContent: "center",
 							}}>
 							<h3 style={{ marginRight: "10px" }}>Events Feed</h3>
 							{/* button create event, button with icon plus/ Adddd  */}
 							<Button
+								onClick={handleCreateEvent}
 								variant="contained"
 								color="primary"
 								startIcon={<AddIcon />}
@@ -131,8 +150,7 @@ const Home = () => {
 									open={showCreateEventPopup}
 									anchor={anchorCreateEvent}
 									onClose={onCreateEventClose}
-									id={id}
-									// TODO: Use url id to create new event
+									userId={id}
 								/>
 							</ClickAwayListener>
 						</div>
