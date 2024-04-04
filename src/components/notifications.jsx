@@ -16,9 +16,10 @@ const notifications = ({ notifications }) => {
 				}}>
 				{/* <h3>Notifications</h3> */}
 				<h3>Notifications </h3>
-				{notifications.map((notification) => {
-					return <NotificationCard notifications={notification} />;
-				})}
+				{notifications.length > 0 &&
+					notifications.map((notification) => {
+						return <NotificationCard notifications={notification} />;
+					})}
 			</Paper>
 		</Grid>
 	);
